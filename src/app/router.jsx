@@ -1,6 +1,6 @@
 // // src/router.jsx
 // import { createBrowserRouter, Navigate } from 'react-router-dom'
-// import ForgotPasswordPage from '../pages/auth/Forgotpasswordpage'
+// import ForgotPasswordPage from '../pages/auth/ForgotpasswordPage'
 
 // import LoginPage from '../pages/auth/LoginPage'
 // import ResetPasswordPage from '../pages/auth/Resetpasswordpage'
