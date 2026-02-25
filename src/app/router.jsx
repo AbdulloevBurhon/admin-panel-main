@@ -3,7 +3,7 @@
 // import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage'
 
 // import LoginPage from '../pages/auth/LoginPage'
-// import ResetPasswordPage from '../pages/auth/Resetpasswordpage'
+// import ResetPasswordPage from '../pages/auth/ResetpasswordPage'
 // import DashboardPage from '../pages/dashboard/DashboardPage'
 
 // // import DashboardPage from "./pages/dashboard/DashboardPage"; // добавишь позже
