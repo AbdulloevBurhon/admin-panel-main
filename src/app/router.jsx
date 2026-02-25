@@ -30,6 +30,7 @@
 //   element: <DashboardPage />
 //  }
 // ])
+//
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage'
