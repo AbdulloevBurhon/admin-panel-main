@@ -40,6 +40,7 @@ import OrdersPage from '@/pages/orders/OrdersPage'
 
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
+import PrivateRoute from '@/routes/PrivateRoute'
 
 export const router = createBrowserRouter([
  {
@@ -53,7 +54,11 @@ export const router = createBrowserRouter([
  },
  {
   path: '/',
-  element: <DashboardLayout />,
+  element: (
+   <PrivateRoute>
+    <DashboardLayout />
+   </PrivateRoute>
+  ),
   children: [
    { index: true, element: <Navigate to="dashboard" replace /> },
    { path: 'dashboard', element: <DashboardPage /> },

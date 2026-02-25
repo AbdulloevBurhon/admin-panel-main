@@ -1,9 +1,10 @@
+import { getToken } from '@/shared/lib/auth'
 import { Navigate } from 'react-router-dom'
 
 export default function PrivateRoute({ children }) {
- const isAuthenticated = true // потом заменим на Redux или token
+ const token = getToken()
 
- if (!isAuthenticated) {
+ if (!token) {
   return <Navigate to="/auth/login" replace />
  }
 
