@@ -1,13 +1,16 @@
+import { logout } from '@/features/auth/authSlice'
 import Button from '@/shared/ui/Button'
 import Dropdown from '@/shared/ui/Dropdown'
 import SearchInput from '@/shared/ui/SearchInput'
 import { Bell, ChevronDown, Menu } from 'lucide-react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 export default function Header({ onMenuClick }) {
  const navigate = useNavigate()
-
+ const dispatch = useDispatch()
  const handleLogout = () => {
+  dispatch(logout())
   navigate('/auth/login')
  }
 
@@ -80,10 +83,7 @@ export default function Header({ onMenuClick }) {
        <Button
         variant="ghost"
         className="w-full justify-start text-red-500 hover:bg-red-50 rounded-none"
-        onClick={() => {
-         close()
-         handleLogout()
-        }}
+        onClick={handleLogout}
        >
         Logout
        </Button>

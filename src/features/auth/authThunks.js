@@ -1,14 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { api } from '../../app/axios'
+import { loginRequest } from './authAPI'
 
-export const postLogin = createAsyncThunk(
- 'auth/postLogin',
+export const login = createAsyncThunk(
+ 'auth/login',
  async (data, { rejectWithValue }) => {
   try {
-   const res = await api.post('/api/Account/login', data)
-   return res.data
+   const response = await loginRequest(data)
+
+   // берем ТОЛЬКО токен
+   return response.data.data
   } catch (error) {
-   return rejectWithValue(error.response?.data || 'Login failed')
+   return rejectWithValue(error.response?.data?.message || 'Login error')
   }
  }
 )

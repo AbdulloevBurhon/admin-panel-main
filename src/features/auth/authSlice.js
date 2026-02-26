@@ -1,29 +1,39 @@
+import { getToken, removeToken, setToken } from '@/shared/lib/auth'
 import { createSlice } from '@reduxjs/toolkit'
-import { postLogin } from './authThunks'
+import { login } from './authThunks'
 
-export const loginSlice = createSlice({
- name: 'login',
- initialState: {
-  response: {},
-  error: null,
-  loading: false
+const initialState = {
+ token: getToken() || null,
+ loading: false,
+ error: null
+}
+
+const authSlice = createSlice({
+ name: 'auth',
+ initialState,
+ reducers: {
+  logout: (state) => {
+   state.token = null
+   removeToken()
+  }
  },
  extraReducers: (builder) => {
   builder
-   .addCase(postLogin.pending, (state) => {
+   .addCase(login.pending, (state) => {
     state.loading = true
     state.error = null
    })
-   .addCase(postLogin.fulfilled, (state, action) => {
+   .addCase(login.fulfilled, (state, action) => {
     state.loading = false
-    state.error = null
-    state.response = action.payload
+    state.token = action.payload
+    setToken(action.payload)
    })
-   .addCase(postLogin.rejected, (state, action) => {
+   .addCase(login.rejected, (state, action) => {
     state.loading = false
-
     state.error = action.payload
    })
  }
 })
-export default loginSlice.reducer
+
+export const { logout } = authSlice.actions
+export default authSlice.reducer

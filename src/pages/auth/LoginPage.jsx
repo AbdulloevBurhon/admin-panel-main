@@ -136,31 +136,60 @@
 //  )
 // }
 // // zxcv0987?
+import { login } from '@/features/auth/authThunks'
 import Button from '@/shared/ui/Button'
 import Input from '@/shared/ui/Input'
 import { Lock, Mail } from 'lucide-react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
  const navigate = useNavigate()
+ const dispatch = useDispatch()
+
+ const { token, loading, error } = useSelector((state) => state.auth)
 
  const handleSubmit = (e) => {
   e.preventDefault()
-  navigate('/dashboard')
+
+  const formData = new FormData(e.target)
+
+  const data = {
+   userName: formData.get('userName'),
+   password: formData.get('password')
+  }
+
+  dispatch(login(data))
  }
+
+ useEffect(() => {
+  if (token) {
+   navigate('/dashboard')
+  }
+ }, [token, navigate])
 
  return (
   <>
    <h2 className="text-3xl font-semibold mb-8 text-gray-800">Log in</h2>
 
    <form onSubmit={handleSubmit} className="space-y-5">
-    <Input type="text" placeholder="text" leftIcon={<Mail size={18} />} />
+    <Input
+     name="userName"
+     type="text"
+     placeholder="Username"
+     leftIcon={<Mail size={18} />}
+    />
 
     <Input
+     name="password"
+     type="password"
      placeholder="Password"
      leftIcon={<Lock size={18} />}
      passwordToggle
     />
+
+    {error && <p className="text-red-500 text-sm">{error}</p>}
 
     <div className="text-right">
      <Link to="/auth/forgot" className="text-sm text-blue-600 hover:underline">
@@ -168,8 +197,8 @@ export default function LoginPage() {
      </Link>
     </div>
 
-    <Button type="submit" fullWidth>
-     Log in
+    <Button type="submit" fullWidth disabled={loading}>
+     {loading ? 'Loading...' : 'Log in'}
     </Button>
    </form>
   </>

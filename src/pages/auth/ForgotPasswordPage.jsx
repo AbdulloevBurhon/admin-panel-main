@@ -101,8 +101,10 @@ import BackLink from '@/shared/ui/BackLink'
 import Button from '@/shared/ui/Button'
 import Input from '@/shared/ui/Input'
 import { Mail } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 export default function ForgotPasswordPage() {
+ const navigate = useNavigate()
  return (
   <>
    <BackLink label="Log in" />
@@ -114,7 +116,9 @@ export default function ForgotPasswordPage() {
    <div className="space-y-5">
     <Input type="text" placeholder="Email" leftIcon={<Mail size={18} />} />
 
-    <Button fullWidth>Send reset link</Button>
+    <Button fullWidth onClick={() => navigate('/auth/reset')}>
+     Send reset link
+    </Button>
    </div>
   </>
  )
