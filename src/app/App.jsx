@@ -1,5 +1,5 @@
 import AppProviders from './providers'
-// cfsdfdsfsdfsd ffdlsfmdslfmf
+// kommit
 export default function App() {
  return <AppProviders />
 }
